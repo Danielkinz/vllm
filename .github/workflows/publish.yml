@@ -20,7 +20,7 @@ jobs:
       - name: Extract branch info
         shell: bash
         run: |
-          release_tag=$(echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g')
+          release_tag=$(echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g')
           echo "Tag: $release_tag"
           echo "release_tag=$release_tag" >> $GITHUB_ENV
         id: extract_branch
