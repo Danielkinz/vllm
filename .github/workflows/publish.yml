@@ -19,9 +19,7 @@ jobs:
     steps:
       - name: Extract branch info
         shell: bash
-        run: |
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-          echo "tag=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g' >> $GITHUB_ENV
+        run: echo "tag=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g' >> $GITHUB_ENV
         id: extract_branch
 
       - name: Create Release
