@@ -20,8 +20,8 @@ jobs:
       - name: Extract branch info
         shell: bash
         run: |
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-          echo "tag=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g' >> $GITHUB_OUTPUT
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "tag=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g' >> $GITHUB_ENV
         id: extract_branch
 
       - name: Create Release
@@ -30,8 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.extract_branch.outputs.tag }}
-          release_name: ${{ steps.extract_branch.outputs.tag }}
+          tag_name: ${{ env.tag }}
+          release_name: ${{ env.tag }}
 
   wheel:
     name: Build Wheel
