@@ -6,9 +6,8 @@ name: Create Release
 
 on:
   push:
-    branches:
-      - release/*
-  workflow_dispatch:
+    tags:
+      - v*
 
 jobs:
   release:
@@ -20,8 +19,7 @@ jobs:
       - name: Extract branch info
         shell: bash
         run: |
-          release_tag=$(echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | sed -e 's/.*\///g')
-          echo "Tag: $release_tag"
+          release_tag=$(echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}")
           echo "release_tag=$release_tag" >> $GITHUB_ENV
         id: extract_branch
 
@@ -80,7 +78,9 @@ jobs:
       - name: Check GPU Env
         if: ${{ matrix.cuda-version != 'cpu' }}
         run: |
-          source .github/workflows/scripts/cuda-env.sh ${{ matrix.cuda-version }}
+          export CUDA_HOME=/usr/local/cuda-${{ matrix.cuda-version }}
+          export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+          export PATH=${CUDA_HOME}/bin:${PATH}
           nvcc --version
         shell:
           bash
