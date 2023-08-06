@@ -71,11 +71,11 @@ jobs:
       - name: Install CUDA ${{ matrix.cuda-version }}
         if: ${{ matrix.cuda-version != 'cpu' }}
         run: |
-          bash .github/workflows/scripts/cuda-install.sh ${{ matrix.cuda-version }} ${{ runner.os }}
+          bash .github/workflows/scripts/cuda-install.sh ${{ matrix.cuda-version }} ${{ matrix.os }}
         shell:
           bash
 
-      - name: Check GPU Env
+      - name: Load and check GPU Env
         if: ${{ matrix.cuda-version != 'cpu' }}
         run: |
           export CUDA_HOME=/usr/local/cuda-${{ matrix.cuda-version }}
