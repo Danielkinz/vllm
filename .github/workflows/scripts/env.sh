@@ -44,3 +44,6 @@ sudo    apt-get install -y --no-install-recommends \
         devscripts \
         debhelper \
         nfs-common
+
+sudo rm -rf "/usr/local/share/boost"
+sudo rm -rf "$AGENT_TOOLSDIRECTORY"
