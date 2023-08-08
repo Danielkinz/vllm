@@ -104,8 +104,8 @@ jobs:
           export PATH=${CUDA_HOME}/bin:$PATH
           export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
           pip install wheel packaging
-          # We don't want to reinstall torch because it would override to torch 2.0.1
-          grep -iv "torch" requirements.txt > requirements.txt
+          # We don't want to reinstall torch because it would upgrade to latest
+          cat requirements.txt | grep -iv "torch" > requirements.txt
           pip install -r requirements.txt
           python setup.py bdist_wheel --dist-dir=dist
           tmpname=cu${{ matrix.cuda-version }}-torch${{ matrix.torch-version }}
