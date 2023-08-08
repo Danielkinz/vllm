@@ -47,3 +47,4 @@ sudo    apt-get install -y --no-install-recommends \
 
 sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+sudo rm -rf "/usr/share/dotnet"
