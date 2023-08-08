@@ -65,10 +65,7 @@ jobs:
       - name: Set up Linux Env
         if: ${{ runner.os == 'Linux' }}
         run: |
-          sudo rm -rf /usr/share/dotnet
           bash .github/workflows/scripts/env.sh
-          echo ${{ needs.create_release.outputs.upload_url }} 
-          echo ${{ needs.steps.extract_branch.outputs.upload_url }} 
         shell:
           bash
 
