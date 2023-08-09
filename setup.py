@@ -1,6 +1,7 @@
 import io
 import os
 import re
+import sys
 import subprocess
 from typing import List, Set
 
@@ -19,6 +20,8 @@ NVCC_FLAGS = ["-O2", "-std=c++17"]
 ABI = 1 if torch._C._GLIBCXX_USE_CXX11_ABI else 0
 CXX_FLAGS += [f"-D_GLIBCXX_USE_CXX11_ABI={ABI}"]
 NVCC_FLAGS += [f"-D_GLIBCXX_USE_CXX11_ABI={ABI}"]
+
+IS_BUILD = 'bdist_wheel' in sys.argv
 
 if CUDA_HOME is None:
     raise RuntimeError(
@@ -58,10 +61,10 @@ for capability in compute_capabilities:
 nvcc_cuda_version = get_nvcc_cuda_version(CUDA_HOME)
 if nvcc_cuda_version < Version("11.0"):
     raise RuntimeError("CUDA 11.0 or higher is required to build the package.")
-if 86 in compute_capabilities and nvcc_cuda_version < Version("11.1"):
+if 86 in compute_capabilities and nvcc_cuda_version < Version("11.1") and not IS_BUILD:
     raise RuntimeError(
         "CUDA 11.1 or higher is required for GPUs with compute capability 8.6.")
-if 90 in compute_capabilities and nvcc_cuda_version < Version("11.8"):
+if 90 in compute_capabilities and nvcc_cuda_version < Version("11.8") and not IS_BUILD:
     raise RuntimeError(
         "CUDA 11.8 or higher is required for GPUs with compute capability 9.0.")
 
