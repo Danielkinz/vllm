@@ -10,8 +10,10 @@ on:
       - release/*
 
 # Needed to create release and upload assets
-permissions:
-  contents: write
+# permissions:
+#   contents: write
+
+permissions: write-all
 
 jobs:
   release:
