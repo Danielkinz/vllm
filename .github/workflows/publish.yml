@@ -80,6 +80,7 @@ jobs:
 
       - name: Install PyTorch-cu${{ matrix.cuda-version }}
         run: |
+          PYTHON_EXECUTABLE=python${{ matrix.python-version }}
           CUDA_VERSION=${{ matrix.cuda-version }}
           $PYTHON_EXECUTABLE -m pip install numpy pyyaml scipy ipython mkl mkl-include ninja cython typing pandas typing-extensions dataclasses setuptools && conda clean -ya
           $PYTHON_EXECUTABLE -m pip install torch -f https://download.pytorch.org/whl/cu${CUDA_VERSION//./}/torch_stable.html
@@ -92,6 +93,7 @@ jobs:
 
       - name: Build wheel
         run: |
+          PYTHON_EXECUTABLE=python${{ matrix.python-version }}
           CUDA_HOME=/usr/local/cuda-${{ matrix.cuda-version }}
           export PATH=${CUDA_HOME}/bin:$PATH
           export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
