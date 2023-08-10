@@ -47,7 +47,7 @@ sudo    apt-get install -y --no-install-recommends \
         nfs-common
 
 sudo add-apt-repository ppa:deadsnakes/ppa
-apt install "python$python_version"
+sudo apt install "python$python_version"
 python$python_version -m pip install --upgrade pip
 
 sudo rm -rf "/usr/local/share/boost"
