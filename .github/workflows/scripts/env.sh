@@ -49,6 +49,7 @@ sudo    apt-get install -y --no-install-recommends \
 sudo add-apt-repository ppa:deadsnakes/ppa
 apt install "python$__PYTHON_VERSION"
 export PYTHON_EXECUTABLE="python$__PYTHON_VERSION"
+$PYTHON_EXECUTABLE -m pip install --upgrade pip
 
 sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
