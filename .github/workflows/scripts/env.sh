@@ -1,5 +1,6 @@
 export LANG C.UTF-8
 
+__PYTHON_VERSION=$1
 
 sudo    apt-get update && \
 sudo    apt-get install -y --no-install-recommends \
@@ -44,6 +45,10 @@ sudo    apt-get install -y --no-install-recommends \
         devscripts \
         debhelper \
         nfs-common
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+apt install "python$__PYTHON_VERSION"
+export PYTHON_EXECUTABLE="python$__PYTHON_VERSION"
 
 sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
