@@ -48,7 +48,9 @@ sudo    apt-get install -y --no-install-recommends \
 
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install "python$python_version"
-python$python_version -m pip install --upgrade pip
+wget https://bootstrap.pypa.io/get-pip.py
+python$python_version get-pip.py
+rm get-pip.py
 
 sudo rm -rf "/usr/local/share/boost"
 sudo rm -rf "$AGENT_TOOLSDIRECTORY"
