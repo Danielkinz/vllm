@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cuda_version=$1
+# Replace '.' with '-' ex: 11.8 -> 11-8
+cuda_version=$(echo $1 | tr "." "-")
 # Removes '-' and '.' ex: ubuntu-20.04 -> ubuntu2004
 OS=$(echo $2 | tr -d ".\-")
 

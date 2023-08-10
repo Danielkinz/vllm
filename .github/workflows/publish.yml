@@ -57,7 +57,7 @@ jobs:
       - name: Set up Linux Env
         if: ${{ runner.os == 'Linux' }}
         run: |
-          bash .github/workflows/scripts/env.sh
+          bash -x .github/workflows/scripts/env.sh
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -66,15 +66,15 @@ jobs:
 
       - name: Install CUDA ${{ matrix.cuda-version }}
         run: |
-          bash .github/workflows/scripts/cuda-install.sh ${{ matrix.cuda-version }} ${{ matrix.os }}
+          bash -x .github/workflows/scripts/cuda-install.sh ${{ matrix.cuda-version }} ${{ matrix.os }}
 
       - name: Install PyTorch-cu${{ matrix.cuda-version }}
         run: |
-          bash .github/workflows/scripts/pytorch-install.sh ${{ matrix.python-version }} ${{ matrix.cuda-version }}
+          bash -x .github/workflows/scripts/pytorch-install.sh ${{ matrix.python-version }} ${{ matrix.cuda-version }}
 
       - name: Build wheel
         run: |
-          bash .github/workflows/scripts/build.sh ${{ matrix.python-version }} ${{ matrix.cuda-version }}
+          bash -x .github/workflows/scripts/build.sh ${{ matrix.python-version }} ${{ matrix.cuda-version }}
       
       - name: Upload Release Asset
         id: upload_release_asset 
