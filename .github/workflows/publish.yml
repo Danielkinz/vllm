@@ -53,16 +53,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: ${{ matrix.python-version }}
 
       - name: Set up Linux Env
         if: ${{ runner.os == 'Linux' }}
         run: |
-          bash .github/workflows/scripts/env.sh
+          bash .github/workflows/scripts/env.sh ${{ matrix.python-version }}
         shell:
           bash
 
