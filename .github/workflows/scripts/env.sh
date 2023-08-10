@@ -47,7 +47,7 @@ sudo    apt-get install -y --no-install-recommends \
         nfs-common
 
 sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt install "python$python_version"
+sudo apt install "python$python_version" "python$python_version-distutils"
 wget https://bootstrap.pypa.io/get-pip.py
 python$python_version get-pip.py
 rm get-pip.py
