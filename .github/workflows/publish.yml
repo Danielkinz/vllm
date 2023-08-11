@@ -46,9 +46,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          os: ['ubuntu-18.04', 'ubuntu-20.04', 'ubuntu-22.04']
+          os: ['ubuntu-18.04']
           python-version: ['3.8', '3.9', '3.10', '3.11']
-          cuda-version: ['11.8'] # Github runner can't build anything older than 11.8
+          cuda-version: ['11.7', '11.8'] # Github runner can't build anything older than 11.8
 
     steps:
       - name: Checkout
@@ -78,7 +78,7 @@ jobs:
           ubuntu_version=$(echo ${{ matrix.os }} | tr -d ".-")
           wheel_name=$(ls dist/*whl | xargs -n 1 basename)
           echo "wheel_name=${wheel_name}" >> $GITHUB_ENV
-          echo "asset_name=$(echo $wheel_name | sed "s/-/-$ubuntu_version-/2")" >> $GITHUB_ENV
+          echo "asset_name=$(echo $wheel_name | sed "s/-/+${{ matrix.cuda-version }}-/2")" >> $GITHUB_ENV
       
       - name: Upload Release Asset
         id: upload_release_asset 
