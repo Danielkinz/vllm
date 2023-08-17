@@ -1,3 +1,5 @@
+const core = require('@actions/core');
+
 async function run(github, context) {
 	try {
 		const response = await github.rest.repos.createRelease({
