@@ -1,6 +1,4 @@
-const core = require('@actions/core');
-
-async function run(github, context) {
+module.exports = async (github, context, core) => {
 	try {
 		const response = await github.rest.repos.createRelease({
 			draft: false,
@@ -17,8 +15,4 @@ async function run(github, context) {
 	} catch (error) {
 		core.setFailed(error.message);
 	}
-}
-
-module.exports = (github, context) => {
-	run(github, context)
 }

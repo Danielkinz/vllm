@@ -36,7 +36,8 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
-            require('.github/workflows/scripts/create_release.js')(github, context)
+            const script = require('.github/workflows/scripts/create_release.js')
+            await script(github, context, core)
 
   wheel:
     name: Build Wheel
